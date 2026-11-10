@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.classList.add('js');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Oluwafemi Olabukoye · Embedded & Industrial IoT Engineer</title>
@@ -455,9 +456,33 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
 .process li::before { background: linear-gradient(var(--accent), var(--accent)) left bottom / 0 2px no-repeat; transition: background-size .4s; }
 .process li:hover::before { background-size: 100% 2px; }
 
+/* Scroll reveal: sections rise in as they enter the screen (phones and desktop).
+   Only active once JS has run (html.js), so content can never stay hidden. */
+.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+.js .reveal.in-view { opacity: 1; transform: none; }
+/* Signal-chain boxes switch on one after another when the project scrolls into view */
+.js .case .io { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease, border-color .2s; transition-delay: var(--d, 0s); }
+.js .case.in-view .io { opacity: 1; transform: none; }
+.js .case.in-view .io:hover { transform: translateY(-2px); transition-delay: 0s; }
+/* Process steps: the rule fills in sequence as the section scrolls in */
+.process li.in-view::before { background-size: 100% 2px; transition: background-size .6s ease var(--d, 0s); }
+
+/* Touch screens have no hover, so light up the hover effects as things scroll into view */
+@media (hover: none) {
+  .case.in-view .chain, .case.in-view .case-photo { border-color: var(--accent); }
+  .proof a.in-view h3 { color: var(--accent); }
+}
+
+/* Reduce-motion setting (also switched on by some phones' battery saver):
+   drop sliding, zooming and flowing movement, but keep fades, colour changes
+   and the live text updates so the page still feels alive. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .hero h1 em { color: var(--gold); background: none; }
+  .hero .intro > *, .hero .seq, .core,
+  .col.in .io::after, .col.out .io::before,
+  .chip.deployed::before, .chip.field::before { animation: none !important; }
+  .hero h1 em { animation: none; color: var(--gold); background: none; }
+  .js .reveal, .js .case .io { transform: none !important; }
+  .btn:hover, .io:hover, .gallery figure:hover img, .case-photo a:hover img { transform: none !important; }
 }
 </style>
 </head>
@@ -826,10 +851,34 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Scroll reveal and "in view" states (stand-ins for hover on touch screens).
+  var revealSel = '.sec-head, .case-text, .case-visual, .gallery figure, .skills > div, .role, .edu > div, .contact .wrap > *';
+  var reveals = document.querySelectorAll(revealSel);
+  reveals.forEach(function (el) { el.classList.add('reveal'); });
+  // Stagger items that sit side by side in grids.
+  [['.gallery figure', .08, 4], ['.skills > div', .05, 2], ['.process li', .12, 6], ['.edu > div', .1, 2]].forEach(function (g) {
+    document.querySelectorAll(g[0]).forEach(function (el, n) { el.style.setProperty('--d', ((n % g[2]) * g[1]) + 's'); });
+  });
+  document.querySelectorAll('.case').forEach(function (c) {
+    c.querySelectorAll('.io').forEach(function (el, n) { el.style.setProperty('--d', (.15 + n * .09) + 's'); });
+  });
+  var watch = document.querySelectorAll(revealSel + ', .case, .process li, .proof a');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    watch.forEach(function (el) { io.observe(el); });
+  } else {
+    watch.forEach(function (el) { el.classList.add('in-view'); });
+  }
+
   // Step through the dispense cycle in the hero panel, with a progress bar.
+  // (Runs even with reduce-motion on: it is a highlight moving down a list, not movement.)
   var items = document.querySelectorAll('#seq li');
   var bar = document.getElementById('seqbar');
-  if (!reduce && items.length) {
+  if (items.length) {
     var i = 0;
     bar.style.transform = 'scaleX(' + (1 / items.length) + ')';
     setInterval(function () {
@@ -851,7 +900,7 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
   onScroll();
 
   // Count-up on the hero stats (final values are already in the HTML).
-  if (!reduce) {
+  {
     document.querySelectorAll('[data-count]').forEach(function (el) {
       var to = +el.getAttribute('data-count'), suf = el.getAttribute('data-suffix') || '';
       var start = null;
@@ -868,7 +917,7 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
   // Typed focus line.
   var typedEl = document.getElementById('typed');
   var words = ['embedded firmware', 'industrial IoT', 'PCB design', 'edge-to-cloud integration', 'field commissioning'];
-  if (!reduce && typedEl) {
+  if (typedEl) {
     var w = 0, c = words[0].length, deleting = true;
     function tick() {
       var word = words[w];
