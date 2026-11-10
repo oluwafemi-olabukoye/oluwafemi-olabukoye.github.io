@@ -985,6 +985,15 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
 })();
 </script>
 <!-- Visitor analytics: GoatCounter (free, no cookies, no consent banner needed). Dashboard: https://fmgold.goatcounter.com -->
+<script>
+  // Owner opt-out, remembered per browser: open the site once with ?notrack to stop counting
+  // your own visits, or ?track to count them again. GoatCounter skips when skipgc === 't'.
+  try {
+    var q = location.search;
+    if (/[?&]notrack\b/.test(q)) { localStorage.setItem('skipgc', 't'); alert('Analytics off for this browser. Your visits will not be counted.'); }
+    else if (/[?&]track\b/.test(q)) { localStorage.removeItem('skipgc'); alert('Analytics on again for this browser.'); }
+  } catch (e) {}
+</script>
 <script data-goatcounter="https://fmgold.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
