@@ -214,6 +214,12 @@ section.block + section.block { border-top: 1px solid var(--line); }
 .stack span { font: 400 12px/1 var(--f-mono); padding: 6px 8px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); color: var(--fg); }
 .note { font-size: 14px; color: var(--muted); border-left: 2px solid var(--gold); padding-left: 12px; }
 
+/* Case-study photo under the signal chain */
+.case-visual { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.case-photo { margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
+.case-photo img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.case-photo figcaption { padding: 10px 14px; font-size: 13px; line-height: 1.45; color: var(--muted); border-top: 1px solid var(--line); }
+
 /* Signal chain diagram */
 .chain {
   min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
@@ -462,7 +468,7 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
   <div class="wrap">
     <div class="intro">
       <div class="id-line">
-        <img class="avatar" src="images/headshot.jpg" alt="Oluwafemi Olabukoye" width="72" height="72">
+        <img class="avatar" src="images/headshot.webp" alt="Oluwafemi Olabukoye" width="72" height="72">
         <p class="eyebrow">Embedded Systems &amp; Industrial IoT Engineer</p>
       </div>
       <h1>Building embedded systems that work in the <em>real world</em>.</h1>
@@ -471,7 +477,7 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
       <div class="ctas">
         <a class="btn primary" href="#projects">See the projects</a>
         <a class="btn ghost" href="#contact">Get in touch</a>
-        <a class="btn ghost" href="cv/Oluwafemi-Olabukoye-CV.pdf" download>Download CV</a>
+        <a class="btn ghost" href="cv/Oluwafemi-Olabukoye-CV.pdf" download data-goatcounter-click="cv-download" data-goatcounter-title="Download CV (hero)">Download CV</a>
       </div>
       <div class="stats">
         <div class="stat"><b data-count="4">4</b><span>GasFlo units deployed</span></div>
@@ -531,6 +537,7 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
           <div class="stack"><span>ESP32-S3</span><span>ESP32-P4</span><span>Custom PCB</span><span>HX711</span><span>Load cells</span><span>Ultrasonic</span><span>SSR</span><span>BLE</span></div>
           <p class="note">Token generation was built by the backend team; I integrated validation on the device.</p>
         </div>
+        <div class="case-visual">
         <div class="chain" role="img" aria-label="GasFlo signal chain: sensors and touchscreen feed the ESP32-S3, which drives the relay and receipt printer">
           <div class="col in">
             <span class="col-label">Inputs</span>
@@ -546,6 +553,11 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
             <div class="io"><b>Live display</b><span>progress to target</span></div>
             <div class="io"><b>Thermal printer</b><span>BLE · receipt</span></div>
           </div>
+        </div>
+        <figure class="case-photo">
+          <img src="images/case-gasflo-pcb.webp" width="760" height="570" loading="lazy" alt="The GasFlo V1.0 custom control board held in hand, with ESP32-S3 module, load-cell amplifier board, USB-C and relay and ultrasonic connectors">
+          <figcaption>The GasFlo V1.0 control board I designed: ESP32-S3, load-cell amplifier, relay and ultrasonic connectors.</figcaption>
+        </figure>
         </div>
       </article>
 
@@ -563,6 +575,7 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
           </ul>
           <div class="stack"><span>Raspberry Pi 4</span><span>Python</span><span>Linux</span><span>Modbus RTU</span><span>RS485</span><span>Telemetry</span></div>
         </div>
+        <div class="case-visual">
         <div class="chain" role="img" aria-label="CNG signal chain: PTZ gas meters over Modbus RTU RS485 into a Raspberry Pi gateway, out to remote telemetry">
           <div class="col in">
             <span class="col-label">Inputs</span>
@@ -575,6 +588,11 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
             <div class="io"><b>Remote telemetry</b><span>network uplink</span></div>
             <div class="io"><b>Remote access</b><span>support &amp; diagnostics</span></div>
           </div>
+        </div>
+        <figure class="case-photo">
+          <img src="images/case-cng-meter.webp" width="960" height="720" loading="lazy" alt="Gateway enclosure mounted on a gas metering line above a PTZ-BOX meter, with RS485 and network cabling">
+          <figcaption>Installed on site: the gateway enclosure on the metering line, wired to the PTZ-BOX it polls over RS485.</figcaption>
+        </figure>
         </div>
       </article>
 
@@ -646,29 +664,29 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
         <p>Board bring-up on my desk, and the same systems installed and running on site.</p>
       </div>
       <div class="gallery">
-        <figure class="tall" data-src="images/field-gasflo-deployed.jpg">
-          <img src="images/field-gasflo-deployed.jpg" style="object-position: 50% 60%" alt="Oluwafemi placing an LPG cylinder on the scale of a deployed GasFlo dispensing unit" loading="lazy">
+        <figure class="tall" data-src="images/field-gasflo-deployed.webp">
+          <img src="images/field-gasflo-deployed.webp" style="object-position: 50% 60%" alt="Oluwafemi placing an LPG cylinder on the scale of a deployed GasFlo dispensing unit" loading="lazy">
           <figcaption><small>Field · GasFlo</small>Running a dispense on one of the four deployed units</figcaption>
         </figure>
-        <figure data-src="images/bench-vehicle-boards.jpg">
-          <img src="images/bench-vehicle-boards.jpg" style="object-position: 50% 35%" alt="Two vehicle-safety PCBs with cellular modules on a preheater, held with tweezers" loading="lazy">
+        <figure data-src="images/bench-vehicle-boards.webp">
+          <img src="images/bench-vehicle-boards.webp" style="object-position: 50% 35%" alt="Two vehicle-safety PCBs with cellular modules on a preheater, held with tweezers" loading="lazy">
           <figcaption><small>Bench · Vehicle safety</small>Boards on the preheater during assembly</figcaption>
         </figure>
-        <figure data-src="images/bench-firmware-meter.jpg">
-          <img src="images/bench-firmware-meter.jpg" style="object-position: 50% 40%" alt="Writing firmware at a desk with a multimeter and an opened meter interface wired up for testing" loading="lazy">
+        <figure data-src="images/bench-firmware-meter.webp">
+          <img src="images/bench-firmware-meter.webp" style="object-position: 50% 40%" alt="Writing firmware at a desk with a multimeter and an opened meter interface wired up for testing" loading="lazy">
           <figcaption><small>Bench · Telemetry</small>Testing firmware against the meter interface before site install</figcaption>
         </figure>
-        <figure class="tall" data-src="images/field-cng-install.jpg">
-          <img src="images/field-cng-install.jpg" style="object-position: 50% 40%" alt="Oluwafemi in hard hat and hi-vis vest working on a meter device on a gas pipeline" loading="lazy">
+        <figure class="tall" data-src="images/field-cng-install.webp">
+          <img src="images/field-cng-install.webp" style="object-position: 50% 40%" alt="Oluwafemi in hard hat and hi-vis vest working on a meter device on a gas pipeline" loading="lazy">
           <figcaption><small>Field · CNG</small>On-site meter installation, PPE on</figcaption>
         </figure>
-        <figure data-src="images/bench-rework.jpg">
-          <img src="images/bench-rework.jpg" style="object-position: 50% 30%" alt="Hot-air rework on a batch of PCBAs" loading="lazy">
+        <figure data-src="images/bench-rework.webp">
+          <img src="images/bench-rework.webp" style="object-position: 50% 30%" alt="Hot-air rework on a batch of PCBAs" loading="lazy">
           <figcaption><small>Bench · Rework</small>Hot-air rework across a batch of PCBAs</figcaption>
         </figure>
-        <figure data-src="images/bench-lab.jpg">
-          <img src="images/bench-lab.jpg" style="object-position: 30% 50%" alt="Working on a PCB at a lab bench with oscilloscope, microscope and soldering station" loading="lazy">
-          <figcaption><small>Bench · Bring-up</small>Board bring-up at the lab bench</figcaption>
+        <figure data-src="images/bench-design-to-board.webp">
+          <img src="images/bench-design-to-board.webp" style="object-position: 50% 45%" alt="An assembled ESP32-S3 PCB held in front of a laptop showing the same board's 3D layout in EasyEDA" loading="lazy">
+          <figcaption><small>Bench · Design</small>From the EasyEDA layout to the assembled board</figcaption>
         </figure>
       </div>
     </div>
@@ -768,15 +786,15 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
       <h2>Have a machine that needs to talk?</h2>
       <p>I'm open to remote and hybrid engineering roles, and to hardware teams and partners who need a connected product taken from prototype to deployment.</p>
       <div class="signoff">
-        <img src="images/portrait-formal.jpg" alt="Portrait of Oluwafemi Olabukoye" width="88" height="88" loading="lazy">
+        <img src="images/portrait-formal.webp" alt="Portrait of Oluwafemi Olabukoye" width="88" height="88" loading="lazy">
         <div><b>Oluwafemi Olabukoye</b><span>Embedded Systems &amp; Industrial IoT Engineer</span></div>
       </div>
     </div>
     <div class="links-list">
-      <div class="link-row"><small>Email</small><a class="val" id="v-email" href="mailto:oluwafemiolabukoye@gmail.com">oluwafemiolabukoye@gmail.com</a><button type="button" data-copy="v-email">Copy</button></div>
-      <div class="link-row"><small>WhatsApp</small><span class="val todo" id="v-wa">+234 [your number]</span><a class="wa" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Oluwafemi%2C%20I%20saw%20your%20portfolio." target="_blank" rel="noopener">Chat</a></div>
-      <div class="link-row"><small>LinkedIn</small><a class="val" id="v-li" href="https://www.linkedin.com/in/oluwafemi-olabukoye" target="_blank" rel="noopener">linkedin.com/in/oluwafemi-olabukoye</a><button type="button" data-copy="v-li">Copy</button></div>
-      <div class="link-row"><small>GitHub</small><a class="val" id="v-gh" href="https://github.com/oluwafemi-olabukoye" target="_blank" rel="noopener">github.com/oluwafemi-olabukoye</a><button type="button" data-copy="v-gh">Copy</button></div>
+      <div class="link-row"><small>Email</small><a class="val" id="v-email" href="mailto:oluwafemiolabukoye@gmail.com" data-goatcounter-click="contact-email">oluwafemiolabukoye@gmail.com</a><button type="button" data-copy="v-email">Copy</button></div>
+      <div class="link-row"><small>WhatsApp</small><span class="val todo" id="v-wa">+234 [your number]</span><a class="wa" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Oluwafemi%2C%20I%20saw%20your%20portfolio." target="_blank" rel="noopener" data-goatcounter-click="contact-whatsapp">Chat</a></div>
+      <div class="link-row"><small>LinkedIn</small><a class="val" id="v-li" href="https://www.linkedin.com/in/oluwafemi-olabukoye" target="_blank" rel="noopener" data-goatcounter-click="contact-linkedin">linkedin.com/in/oluwafemi-olabukoye</a><button type="button" data-copy="v-li">Copy</button></div>
+      <div class="link-row"><small>GitHub</small><a class="val" id="v-gh" href="https://github.com/oluwafemi-olabukoye" target="_blank" rel="noopener" data-goatcounter-click="contact-github">github.com/oluwafemi-olabukoye</a><button type="button" data-copy="v-gh">Copy</button></div>
       <div class="link-row"><small>Location</small><span class="val" id="v-loc">Lagos, Nigeria · UTC+1</span><button type="button" data-copy="v-loc">Copy</button></div>
     </div>
   </div>
@@ -966,5 +984,7 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
   });
 })();
 </script>
+<!-- Visitor analytics: GoatCounter (free, no cookies, no consent banner needed). Dashboard: https://fmgold.goatcounter.com -->
+<script data-goatcounter="https://fmgold.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
