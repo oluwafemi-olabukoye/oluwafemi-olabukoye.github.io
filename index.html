@@ -133,7 +133,7 @@ nav.links a:hover { color: var(--hero-fg); }
 @media (max-width: 480px) { .avatar { width: 60px; height: 60px; } }
 .hero h1 {
   margin-top: 18px;
-  font-size: clamp(36px, 5.6vw, 64px); font-weight: 800; font-stretch: 112%; letter-spacing: -.01em;
+  font-size: clamp(36px, 4.6vw, 54px); font-weight: 800; font-stretch: 105%; letter-spacing: -.01em;
 }
 .hero h1 em { font-style: normal; color: var(--gold); }
 .hero .lede { margin-top: 22px; max-width: 58ch; color: var(--hero-muted); font-size: 18px; }
@@ -168,21 +168,6 @@ nav.links a:hover { color: var(--hero-fg); }
 .seq-foot { margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(169,186,203,.25); color: var(--hero-muted); font-size: 12px; line-height: 1.5; }
 .seq-foot strong { color: var(--hero-fg); font-weight: 500; }
 
-/* Proof strip */
-.proof { border-bottom: 1px solid var(--line); background: var(--surface); }
-.proof .wrap { display: grid; grid-template-columns: repeat(4, 1fr); padding-block: 0; }
-.proof a { display: block; padding: 22px 20px 22px 0; text-decoration: none; color: var(--fg); border-right: 1px solid var(--line); min-width: 0; }
-.proof a + a { padding-left: 20px; }
-.proof a:last-child { border-right: 0; }
-.proof h3 { font-size: 18px; font-weight: 700; font-stretch: 108%; margin-top: 10px; }
-.proof p { font-size: 14px; color: var(--muted); margin-top: 4px; }
-@media (max-width: 900px) {
-  .proof .wrap { grid-template-columns: 1fr 1fr; }
-  .proof a { padding: 18px 12px 18px 0; border-bottom: 1px solid var(--line); }
-  .proof a + a { padding-left: 0; }
-  .proof a:nth-child(2n) { padding-left: 14px; border-right: 0; }
-  .proof a:nth-child(n+3) { border-bottom: 0; }
-}
 
 .chip {
   display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 999px;
@@ -213,7 +198,6 @@ section.block + section.block { border-top: 1px solid var(--line); }
 .case-text li::marker { color: var(--accent); }
 .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .stack span { font: 400 12px/1 var(--f-mono); padding: 6px 8px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); color: var(--fg); }
-.note { font-size: 14px; color: var(--muted); border-left: 2px solid var(--gold); padding-left: 12px; }
 
 /* Case-study photo under the signal chain */
 .case-visual { display: grid; gap: 16px; align-content: start; min-width: 0; }
@@ -235,6 +219,18 @@ section.block + section.block { border-top: 1px solid var(--line); }
   .case-photo { grid-template-columns: 1fr; }
   .case-photo img { aspect-ratio: 16 / 10; }
 }
+
+/* Smaller projects: two compact cards side by side */
+.more { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 44px; border-top: 1px solid var(--line); }
+.mini { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: grid; gap: 12px; align-content: start; min-width: 0; transition: border-color .3s; }
+.mini .chip { justify-self: start; }
+.mini h3 { font-size: 22px; font-weight: 750; font-stretch: 108%; }
+.mini p { color: var(--muted); font-size: 15px; }
+.mini:hover { border-color: var(--accent); }
+@media (hover: none) { .mini.in-view { border-color: var(--accent); } }
+@media (max-width: 760px) { .more { grid-template-columns: 1fr; } }
+.role .what { margin-top: 8px; color: var(--fg); }
+.sec-head { margin-bottom: 32px; }
 
 /* Signal chain diagram */
 .chain {
@@ -295,18 +291,6 @@ section.block + section.block { border-top: 1px solid var(--line); }
 @media (max-width: 900px) { .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 240px; } }
 @media (max-width: 480px) { .gallery { grid-template-columns: 1fr; grid-auto-rows: 280px; } }
 
-/* Process */
-.process { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; counter-reset: p; }
-.process li { counter-increment: p; padding: 0 16px 0 0; min-width: 0; position: relative; }
-.process li::before {
-  content: counter(p, decimal-leading-zero); display: block; font: 500 13px/1 var(--f-mono); color: var(--accent);
-  padding-bottom: 14px; margin-bottom: 14px; border-bottom: 2px solid var(--accent);
-}
-.process li:last-child::before { border-bottom-color: var(--gold); color: var(--gold-ink); }
-.process h3 { font-size: 18px; font-weight: 700; font-stretch: 105%; }
-.process p { color: var(--muted); font-size: 14px; margin-top: 6px; }
-@media (max-width: 900px) { .process { grid-template-columns: 1fr 1fr; row-gap: 28px; } }
-@media (max-width: 480px) { .process { grid-template-columns: 1fr; } }
 
 /* Expertise */
 .skills { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
@@ -398,15 +382,7 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
 .hero .intro > :nth-child(5) { animation-delay: .52s; }
 .hero .intro > :nth-child(6) { animation-delay: .64s; }
 .hero .seq { animation-delay: .45s; }
-.hero h1 em { background: linear-gradient(90deg, var(--gold), #F6D28F, var(--gold)); background-size: 200% 100%;
-  -webkit-background-clip: text; background-clip: text; color: transparent; animation: sheen 4s ease-in-out 1.2s infinite; }
-@keyframes sheen { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
 
-/* Typed focus line */
-.typed { margin-top: 20px; font: 500 15px/1.4 var(--f-mono); color: var(--hero-muted); min-height: 1.4em; }
-.typed .k { color: var(--gold); }
-.typed .v { color: var(--hero-fg); }
-.caret { display: inline-block; width: 9px; height: 1.05em; background: var(--gold); vertical-align: -2px; margin-left: 3px; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
 /* Hero stats */
@@ -414,6 +390,8 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
 .stat { display: grid; gap: 6px; padding-left: 14px; border-left: 2px solid var(--teal); }
 .stat b { font: 800 32px/1 var(--f-display); font-stretch: 112%; color: var(--hero-fg); font-variant-numeric: tabular-nums; }
 .stat span { font: 500 11px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--hero-muted); max-width: 13ch; }
+
+@media (max-width: 480px) { .stats { gap: 12px 16px; } .stat { padding-left: 10px; } .stat b { font-size: 26px; } .stat span { font-size: 10px; } }
 
 /* Dispense panel: LED + progress bar */
 .seq-head b::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--led); margin-right: 7px; box-shadow: 0 0 8px var(--led); animation: blink 1.6s steps(1) infinite; }
@@ -432,9 +410,6 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
 @keyframes ping { 0% { box-shadow: 0 0 0 0 currentColor; } 70%, 100% { box-shadow: 0 0 0 6px transparent; } }
 
 /* Proof strip hover */
-.proof a { transition: background .2s; }
-.proof a:hover { background: var(--bg); }
-.proof a:hover h3 { color: var(--accent); }
 
 /* Signal chains: data flowing along the wires, core breathing */
 .col.in .io::after, .col.out .io::before {
@@ -452,9 +427,6 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
 .chain { transition: border-color .3s; }
 .case:hover .chain { border-color: var(--accent); }
 
-/* Process: the rule fills on hover */
-.process li::before { background: linear-gradient(var(--accent), var(--accent)) left bottom / 0 2px no-repeat; transition: background-size .4s; }
-.process li:hover::before { background-size: 100% 2px; }
 
 /* Scroll reveal: sections rise in as they enter the screen (phones and desktop).
    Only active once JS has run (html.js), so content can never stay hidden. */
@@ -464,14 +436,11 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
 .js .case .io { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease, border-color .2s; transition-delay: var(--d, 0s); }
 .js .case.in-view .io { opacity: 1; transform: none; }
 .js .case.in-view .io:hover { transform: translateY(-2px); transition-delay: 0s; }
-/* Process steps: the rule fills in sequence as the section scrolls in */
-.process li.in-view::before { background-size: 100% 2px; transition: background-size .6s ease var(--d, 0s); }
 
 /* Touch screens have no hover, so light up the hover effects as things scroll into view */
 @media (hover: none) {
   .case.in-view .chain, .case.in-view .case-photo { border-color: var(--accent); }
-  .proof a.in-view h3 { color: var(--accent); }
-}
+  }
 
 /* Reduce-motion setting (also switched on by some phones' battery saver):
    drop sliding, zooming and flowing movement, but keep fades, colour changes
@@ -480,7 +449,6 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
   .hero .intro > *, .hero .seq, .core,
   .col.in .io::after, .col.out .io::before,
   .chip.deployed::before, .chip.field::before { animation: none !important; }
-  .hero h1 em { animation: none; color: var(--gold); background: none; }
   .js .reveal, .js .case .io { transform: none !important; }
   .btn:hover, .io:hover, .gallery figure:hover img, .case-photo a:hover img { transform: none !important; }
 }
@@ -493,9 +461,8 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
     <a class="brand" href="#top"><b>FMGOLD</b><span>Oluwafemi Olabukoye</span></a>
     <nav class="links" aria-label="Sections">
       <a href="#projects">Projects</a>
-      <a href="#field">In the field</a>
-      <a href="#process">Process</a>
-      <a href="#expertise">Expertise</a>
+      <a href="#field">Photos</a>
+      <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -511,19 +478,16 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
         <img class="avatar" src="images/headshot.webp" alt="Oluwafemi Olabukoye" width="72" height="72">
         <p class="eyebrow">Embedded Systems &amp; Industrial IoT Engineer</p>
       </div>
-      <h1>Building embedded systems that work in the <em>real world</em>.</h1>
-      <p class="lede">I'm Oluwafemi Olabukoye. I turn engineering requirements into working systems, from custom PCBs and microcontroller firmware to industrial gateways and automated machines running in the field.</p>
-      <p class="typed" aria-label="Focus areas: embedded firmware, industrial IoT, PCB design, edge-to-cloud integration, field commissioning"><span class="k">focus:</span> <span class="v" id="typed">embedded firmware</span><span class="caret"></span></p>
+      <h1>Hi, I'm Oluwafemi.</h1>
+      <p class="lede">I design PCBs, write firmware for ESP32 and STM32, and install the gateways that pull data off industrial equipment. Based in Lagos, open to remote work.</p>
       <div class="ctas">
-        <a class="btn primary" href="#projects">See the projects</a>
-        <a class="btn ghost" href="#contact">Get in touch</a>
+        <a class="btn primary" href="#projects">See projects</a>
         <a class="btn ghost" href="cv/Oluwafemi-Olabukoye-CV.pdf" download data-goatcounter-click="cv-download" data-goatcounter-title="Download CV (hero)">Download CV</a>
       </div>
       <div class="stats">
-        <div class="stat"><b data-count="4">4</b><span>GasFlo units deployed</span></div>
-        <div class="stat"><b data-count="4">4</b><span>CNG gateways live</span></div>
-        <div class="stat"><b data-count="5" data-suffix="/5">5/5</b><span>VESCAN PCBAs verified</span></div>
-        <div class="stat"><b>UTC+1</b><span>Lagos · remote &amp; hybrid</span></div>
+        <div class="stat"><b data-count="4">4</b><span>LPG dispensers running</span></div>
+        <div class="stat"><b data-count="4">4</b><span>gas-meter gateways live</span></div>
+        <div class="stat"><b data-count="5" data-suffix="/5">5/5</b><span>prototype boards passed</span></div>
       </div>
     </div>
 
@@ -539,43 +503,27 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
         <li>Print receipt <small>BLE</small></li>
       </ol>
       <div class="seq-bar" aria-hidden="true"><i id="seqbar"></i></div>
-      <p class="seq-foot"><strong>4 units deployed and operational.</strong> I designed the prototype and custom PCB and wrote the control firmware.</p>
+      <p class="seq-foot">What happens on every GasFlo fill.</p>
     </aside>
   </div>
 </section>
 
-<div class="proof">
-  <div class="wrap">
-    <a href="#gasflo"><span class="chip deployed">4 units deployed</span><h3>GasFlo</h3><p>Automated LPG dispensing</p></a>
-    <a href="#cng"><span class="chip field">4 gateways live</span><h3>CNG Telemetry</h3><p>Modbus RTU gas-meter data capture</p></a>
-    <a href="#vescan"><span class="chip proto">Prototype</span><h3>VESCAN</h3><p>Automotive diagnostics &amp; telematics</p></a>
-    <a href="#vsafety"><span class="chip proto">Pilot</span><h3>Vehicle Safety</h3><p>Vehicle safety &amp; emergency comms</p></a>
-  </div>
-</div>
-
 <main>
   <section class="block" id="projects">
     <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">Selected work</p>
-        <h2>Four systems, from the board to the field</h2>
-        <p>Each project is drawn as its signal chain: what the device senses, what runs on the core, and what it drives or reports.</p>
-      </div>
+      <div class="sec-head"><h2>Projects</h2></div>
 
       <article class="case" id="gasflo">
         <div class="case-text">
-          <span class="chip deployed">4 units deployed and operational</span>
+          <span class="chip deployed">4 units running</span>
           <h3>GasFlo</h3>
-          <p class="kind">Automated LPG dispensing system</p>
-          <p>A customer buys LPG and gets a token. The machine validates the token, checks the cylinder is in place, weighs it, dispenses with live progress, stops at the purchased quantity and prints a receipt.</p>
+          <p>An LPG vending machine. You pay, get a token, and it fills your cylinder to the exact amount you bought, then prints a receipt.</p>
           <ul>
-            <li>Designed and tested the prototype and the custom PCB.</li>
-            <li>Wrote the ESP32-S3 firmware for weighing, cylinder detection, dispensing control and live updates.</li>
-            <li>Integrated the pre-designed ESP32-P4 touchscreen, backend token validation and BLE receipt printing.</li>
-            <li>Validated the full workflow and helped deploy four operational units.</li>
+            <li>Designed the control board and wrote the ESP32-S3 firmware: weighing, cylinder detection and dispensing control.</li>
+            <li>Hooked up the touchscreen, token check and Bluetooth printer.</li>
+            <li>The backend team built token generation; I did the device side.</li>
           </ul>
-          <div class="stack"><span>ESP32-S3</span><span>ESP32-P4</span><span>Custom PCB</span><span>HX711</span><span>Load cells</span><span>Ultrasonic</span><span>SSR</span><span>BLE</span></div>
-          <p class="note">Token generation was built by the backend team; I integrated validation on the device.</p>
+          <div class="stack"><span>ESP32-S3</span><span>HX711</span><span>Load cells</span><span>SSR</span><span>BLE</span></div>
         </div>
         <div class="case-visual">
         <div class="chain" role="img" aria-label="GasFlo signal chain: sensors and touchscreen feed the ESP32-S3, which drives the relay and receipt printer">
@@ -595,25 +543,22 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
           </div>
         </div>
         <figure class="case-photo">
-          <a href="images/case-gasflo-pcb.webp" target="_blank" rel="noopener"><img src="images/case-gasflo-pcb.webp" width="760" height="570" loading="lazy" alt="The GasFlo V1.0 custom control board held in hand, with ESP32-S3 module, load-cell amplifier board, USB-C and relay and ultrasonic connectors"></a>
-          <figcaption><small>On the bench</small>The GasFlo V1.0 control board I designed: ESP32-S3, load-cell amplifier, relay and ultrasonic connectors.<span>Click to enlarge ↗</span></figcaption>
+          <a href="images/case-gasflo-pcb.webp" target="_blank" rel="noopener"><img src="images/case-gasflo-pcb.webp" width="760" height="570" loading="lazy" alt="The GasFlo V1.0 control board held in hand, with ESP32-S3 module, load-cell amplifier, USB-C and relay and ultrasonic connectors"></a>
+          <figcaption><small>The board</small>GasFlo V1.0, first spin.<span>Enlarge ↗</span></figcaption>
         </figure>
         </div>
       </article>
 
       <article class="case" id="cng">
         <div class="case-text">
-          <span class="chip field">4 gateways live in the field</span>
-          <h3>CNG Remote Data Capturing</h3>
-          <p class="kind">Industrial gas-metering telemetry</p>
-          <p>Edge gateways that read industrial gas meters at CNG facilities and make the data available remotely.</p>
+          <span class="chip field">4 gateways live</span>
+          <h3>CNG meter telemetry</h3>
+          <p>Raspberry Pi gateways that read gas meters at CNG stations over Modbus and make the readings available remotely.</p>
           <ul>
-            <li>Commissioned 4 Raspberry Pi gateways, now active, with Python polling of PTZ meters over Modbus RTU on RS485.</li>
-            <li>Captured pressure, temperature, measured volume (Vm), corrected volume (Vb) and interval readings.</li>
-            <li>Set up Linux services, networking and remote access; fixed power, meter-comms and connectivity faults on site.</li>
-            <li>Installed, commissioned, validated and handed over with documentation.</li>
+            <li>Set up the Python poller for PTZ meters on RS485: pressure, temperature and volume.</li>
+            <li>Installed and commissioned all four on site, and sorted out the power and comms faults along the way.</li>
           </ul>
-          <div class="stack"><span>Raspberry Pi 4</span><span>Python</span><span>Linux</span><span>Modbus RTU</span><span>RS485</span><span>Telemetry</span></div>
+          <div class="stack"><span>Raspberry Pi 4</span><span>Python</span><span>Modbus RTU</span><span>RS485</span><span>Linux</span></div>
         </div>
         <div class="case-visual">
         <div class="chain" role="img" aria-label="CNG signal chain: PTZ gas meters over Modbus RTU RS485 into a Raspberry Pi gateway, out to remote telemetry">
@@ -631,161 +576,84 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
         </div>
         <figure class="case-photo">
           <a href="images/case-cng-meter.webp" target="_blank" rel="noopener"><img src="images/case-cng-meter.webp" width="960" height="720" loading="lazy" alt="Gateway enclosure mounted on a gas metering line above a PTZ-BOX meter, with RS485 and network cabling"></a>
-          <figcaption><small>In the field</small>The gateway enclosure installed on the metering line, wired to the PTZ-BOX it polls over RS485.<span>Click to enlarge ↗</span></figcaption>
+          <figcaption><small>On site</small>Gateway box on the metering line, wired to the meter.<span>Enlarge ↗</span></figcaption>
         </figure>
         </div>
       </article>
 
-      <article class="case" id="vescan">
-        <div class="case-text">
-          <span class="chip proto">Prototype · production readiness</span>
+      <div class="more">
+        <article class="mini" id="vescan">
+          <span class="chip proto">Prototype</span>
           <h3>VESCAN</h3>
-          <p class="kind">Automotive diagnostics and telematics hardware · Zubi Technologies</p>
-          <p>A connected device that reads vehicle diagnostic buses and reports over cellular.</p>
-          <ul>
-            <li>Worked on the embedded hardware architecture, PCB development and hardware integration.</li>
-            <li>Supported CAN/CAN-FD and K-Line interface work and cellular telemetry.</li>
-            <li>Inspected, brought up and tested PCBAs: all five received boards verified working.</li>
-            <li>Coordinated fabrication with vendors; supported enclosure work and CE testing requirements.</li>
-          </ul>
-          <div class="stack"><span>ESP32</span><span>CAN / CAN-FD</span><span>K-Line</span><span>Cellular</span><span>GNSS</span><span>Custom PCB</span></div>
-        </div>
-        <div class="chain" role="img" aria-label="VESCAN signal chain: vehicle CAN and K-Line buses plus GNSS into an ESP32 board, out over cellular">
-          <div class="col in">
-            <span class="col-label">Inputs</span>
-            <div class="io"><b>Vehicle bus</b><span>CAN · CAN-FD</span></div>
-            <div class="io"><b>Legacy diagnostics</b><span>K-Line</span></div>
-            <div class="io"><b>Position</b><span>GNSS</span></div>
-          </div>
-          <div class="core"><small>Core</small><b>ESP32</b><span>custom PCB<br>5/5 PCBAs verified</span></div>
-          <div class="col out">
-            <span class="col-label">Outputs</span>
-            <div class="io"><b>Telematics</b><span>cellular uplink</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="case" id="vsafety">
-        <div class="case-text">
+          <p>A vehicle diagnostics box that reads the car's CAN and K-Line buses and reports over cellular. Built at Zubi.</p>
+          <p>I worked on the board and brought up the first prototypes. All 5 passed.</p>
+          <div class="stack"><span>ESP32</span><span>CAN / CAN-FD</span><span>K-Line</span><span>LTE</span><span>GNSS</span></div>
+        </article>
+        <article class="mini" id="vsafety">
           <span class="chip proto">Pilot</span>
-          <h3>Vehicle Safety System</h3>
-          <p class="kind">Vehicle safety and emergency communication · Zubi Technologies</p>
-          <p>Vehicle electronics that detect an incident and get a message out, with a fallback when data coverage fails.</p>
-          <ul>
-            <li>Worked on vehicle safety embedded electronics and emergency communication features.</li>
-            <li>Supported firmware testing, OTA updates and SMS-fallback development.</li>
-            <li>Designed and tested vehicle audio relay interface boards; supported pilot hardware integration.</li>
-          </ul>
-          <div class="stack"><span>STM32</span><span>Motion sensing</span><span>Cellular</span><span>MQTT</span><span>AWS IoT</span><span>OTA</span></div>
-        </div>
-        <div class="chain" role="img" aria-label="Vehicle safety system signal chain: motion sensing and OTA updates into an STM32, out to MQTT on AWS IoT, SMS fallback and audio relay">
-          <div class="col in">
-            <span class="col-label">Inputs</span>
-            <div class="io"><b>Motion sensing</b><span>incident detection</span></div>
-            <div class="io"><b>Firmware updates</b><span>OTA</span></div>
-          </div>
-          <div class="core"><small>Core</small><b>STM32</b><span>safety firmware</span></div>
-          <div class="col out">
-            <span class="col-label">Outputs</span>
-            <div class="io"><b>Cloud alerts</b><span>MQTT · AWS IoT</span></div>
-            <div class="io"><b>Fallback</b><span>SMS</span></div>
-            <div class="io"><b>Audio relay board</b><span>in-vehicle audio</span></div>
-          </div>
-        </div>
-      </article>
+          <h3>Vehicle safety system</h3>
+          <p>In-car electronics that detect an incident and send an alert, falling back to SMS when there's no data signal. Built at Zubi.</p>
+          <p>I tested firmware and OTA updates, and designed the audio relay boards.</p>
+          <div class="stack"><span>STM32</span><span>MQTT</span><span>AWS IoT</span><span>OTA</span></div>
+        </article>
+      </div>
     </div>
   </section>
 
   <section class="block" id="field">
     <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">On the bench &amp; in the field</p>
-        <h2>The work, not the renders</h2>
-        <p>Board bring-up on my desk, and the same systems installed and running on site.</p>
-      </div>
+      <div class="sec-head"><h2>Photos</h2></div>
       <div class="gallery">
         <figure class="tall" data-src="images/field-gasflo-deployed.webp">
           <img src="images/field-gasflo-deployed.webp" style="object-position: 50% 60%" alt="Oluwafemi placing an LPG cylinder on the scale of a deployed GasFlo dispensing unit" loading="lazy">
-          <figcaption><small>Field · GasFlo</small>Running a dispense on one of the four deployed units</figcaption>
+          <figcaption><small>GasFlo</small>Filling a cylinder on a live unit</figcaption>
         </figure>
         <figure data-src="images/bench-vehicle-boards.webp">
           <img src="images/bench-vehicle-boards.webp" style="object-position: 50% 35%" alt="Two vehicle-safety PCBs with cellular modules on a preheater, held with tweezers" loading="lazy">
-          <figcaption><small>Bench · Vehicle safety</small>Boards on the preheater during assembly</figcaption>
+          <figcaption><small>Assembly</small>Boards on the preheater</figcaption>
         </figure>
         <figure data-src="images/bench-firmware-meter.webp">
           <img src="images/bench-firmware-meter.webp" style="object-position: 50% 40%" alt="Writing firmware at a desk with a multimeter and an opened meter interface wired up for testing" loading="lazy">
-          <figcaption><small>Bench · Telemetry</small>Testing firmware against the meter interface before site install</figcaption>
+          <figcaption><small>Bench test</small>Firmware against a real meter</figcaption>
         </figure>
         <figure class="tall" data-src="images/field-cng-install.webp">
           <img src="images/field-cng-install.webp" style="object-position: 50% 40%" alt="Oluwafemi in hard hat and hi-vis vest working on a meter device on a gas pipeline" loading="lazy">
-          <figcaption><small>Field · CNG</small>On-site meter installation, PPE on</figcaption>
+          <figcaption><small>CNG site</small>Meter install</figcaption>
         </figure>
         <figure data-src="images/bench-rework.webp">
           <img src="images/bench-rework.webp" style="object-position: 50% 30%" alt="Hot-air rework on a batch of PCBAs" loading="lazy">
-          <figcaption><small>Bench · Rework</small>Hot-air rework across a batch of PCBAs</figcaption>
+          <figcaption><small>Rework</small>Hot air on a batch of boards</figcaption>
         </figure>
         <figure data-src="images/bench-design-to-board.webp">
           <img src="images/bench-design-to-board.webp" style="object-position: 50% 45%" alt="An assembled ESP32-S3 PCB held in front of a laptop showing the same board's 3D layout in EasyEDA" loading="lazy">
-          <figcaption><small>Bench · Design</small>From the EasyEDA layout to the assembled board</figcaption>
+          <figcaption><small>Design</small>Layout to finished board</figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <section class="block" id="process">
+  <section class="block" id="skills">
     <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">How I work</p>
-        <h2>Requirements in, a deployed system out</h2>
-        <p>The same six stages carry every project, and the last one is where most prototypes stall.</p>
-      </div>
-      <ol class="process">
-        <li><h3>Requirements</h3><p>What the machine must do, measure and survive on site.</p></li>
-        <li><h3>Architecture</h3><p>MCU, sensors, buses and the path to the cloud.</p></li>
-        <li><h3>Design</h3><p>Schematic, PCB layout and firmware structure.</p></li>
-        <li><h3>Prototype</h3><p>Board bring-up, drivers and first integration.</p></li>
-        <li><h3>Validation</h3><p>Test the full workflow, fix faults, document results.</p></li>
-        <li><h3>Deployment</h3><p>Install, commission, hand over and support.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="block" id="expertise">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">Technical expertise</p>
-        <h2>Hardware, firmware and the wire between them</h2>
-      </div>
+      <div class="sec-head"><h2>Skills</h2></div>
       <dl class="skills">
-        <div><dt>Programming</dt><dd>Embedded C, C++, Python</dd></div>
-        <div><dt>MCUs &amp; computing</dt><dd>ESP32, ESP32-S3, ESP32-P4, STM32, ATmega, Raspberry Pi</dd></div>
-        <div><dt>Tools &amp; frameworks</dt><dd>ESP-IDF, FreeRTOS, PlatformIO, STM32CubeIDE, Linux, Git</dd></div>
-        <div><dt>Electronics &amp; PCB</dt><dd>Schematic design, PCB layout, prototyping, PCBA inspection, bring-up · KiCad, Altium, EasyEDA</dd></div>
-        <div><dt>Industrial protocols</dt><dd>Modbus RTU, RS485, UART, SPI, I2C, serial gateways</dd></div>
-        <div><dt>Automotive</dt><dd>CAN, CAN-FD, K-Line, OBD diagnostics</dd></div>
-        <div><dt>Connectivity &amp; cloud</dt><dd>Wi-Fi, BLE, LTE/GSM, GNSS, MQTT, HTTP/HTTPS, AWS IoT</dd></div>
-        <div><dt>Systems engineering</dt><dd>Sensor integration, OTA, fault diagnosis, commissioning, documentation</dd></div>
+        <div><dt>Firmware</dt><dd>C, C++, Python · ESP-IDF, FreeRTOS, STM32CubeIDE, PlatformIO</dd></div>
+        <div><dt>Hardware</dt><dd>ESP32, STM32, Raspberry Pi · schematics, PCB layout, bring-up · KiCad, Altium, EasyEDA</dd></div>
+        <div><dt>Buses</dt><dd>Modbus RTU, RS485, CAN, K-Line, UART, SPI, I2C</dd></div>
+        <div><dt>Connectivity</dt><dd>Wi-Fi, BLE, LTE, GNSS, MQTT, AWS IoT, OTA</dd></div>
       </dl>
     </div>
   </section>
 
   <section class="block" id="experience">
     <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">Experience</p>
-        <h2>Where I've built it</h2>
-      </div>
+      <div class="sec-head"><h2>Experience</h2></div>
       <div class="timeline">
         <div class="role">
-          <p class="when"><b>Current</b>Jan 2026 – Present</p>
+          <p class="when"><b>Now</b>Jan 2026 –</p>
           <div>
             <h3>IoT Delivery Engineer</h3>
-            <p class="org">iTech (Tetracore) · Lagos</p>
-            <ul>
-              <li>Industrial IoT installation, gateway integration and remote telemetry.</li>
-              <li>Raspberry Pi CNG data acquisition and Modbus/RS485 metering integration: 4 gateways commissioned and active.</li>
-              <li>Validation, troubleshooting, documentation and OEM/vendor coordination.</li>
-            </ul>
+            <p class="org">iTech (Tetracore), Lagos</p>
+            <p class="what">Install and look after gas-meter gateways at CNG sites.</p>
           </div>
         </div>
         <div class="role">
@@ -793,11 +661,7 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
           <div>
             <h3>Embedded Systems / IoT Engineer</h3>
             <p class="org">Zubi Technologies</p>
-            <ul>
-              <li>Delivered embedded hardware and firmware for <a href="#vescan">VESCAN</a> (automotive diagnostics &amp; telematics) and a <a href="#vsafety">vehicle safety system</a> (taken to pilot).</li>
-              <li>Brought up and tested VESCAN PCBAs (5/5 verified) and coordinated fabrication with PCB vendors.</li>
-              <li>Embedded C/C++ firmware, circuit prototyping, schematic and PCB development, integration and debugging.</li>
-            </ul>
+            <p class="what">Firmware and hardware for <a href="#vescan">VESCAN</a> and the <a href="#vsafety">vehicle safety system</a>.</p>
           </div>
         </div>
         <div class="role">
@@ -805,15 +669,12 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
           <div>
             <h3>Software Tester &amp; Product Manager</h3>
             <p class="org">MedTech Africa</p>
-            <ul>
-              <li>Software testing, QA and product requirements for health-technology products.</li>
-            </ul>
           </div>
         </div>
       </div>
       <div class="edu">
-        <div><b>B.Eng. Computer Engineering</b><span>University of Ilorin · Second Class Upper (2:1) · 2022</span></div>
-        <div><b>National Diploma, Science Laboratory Technology</b><span>Kwara State Polytechnic · Distinction · 2015</span></div>
+        <div><b>B.Eng. Computer Engineering</b><span>University of Ilorin · 2:1 · 2022</span></div>
+        <div><b>ND, Science Laboratory Technology</b><span>Kwara State Polytechnic · Distinction · 2015</span></div>
       </div>
     </div>
   </section>
@@ -822,12 +683,11 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
 <section class="contact" id="contact">
   <div class="wrap">
     <div>
-      <p class="eyebrow">Contact</p>
-      <h2>Have a machine that needs to talk?</h2>
-      <p>I'm open to remote and hybrid engineering roles, and to hardware teams and partners who need a connected product taken from prototype to deployment.</p>
+      <h2>Get in touch</h2>
+      <p>I'm looking for remote or hybrid embedded and IoT roles. Email is the quickest way to reach me.</p>
       <div class="signoff">
         <img src="images/portrait-formal.webp" alt="Portrait of Oluwafemi Olabukoye" width="88" height="88" loading="lazy">
-        <div><b>Oluwafemi Olabukoye</b><span>Embedded Systems &amp; Industrial IoT Engineer</span></div>
+        <div><b>Oluwafemi Olabukoye</b><span>Lagos, Nigeria (UTC+1)</span></div>
       </div>
     </div>
     <div class="links-list">
@@ -835,14 +695,13 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
       <div class="link-row"><small>WhatsApp</small><span class="val todo" id="v-wa">+234 [your number]</span><a class="wa" href="https://wa.me/234XXXXXXXXXX?text=Hi%20Oluwafemi%2C%20I%20saw%20your%20portfolio." target="_blank" rel="noopener" data-goatcounter-click="contact-whatsapp">Chat</a></div>
       <div class="link-row"><small>LinkedIn</small><a class="val" id="v-li" href="https://www.linkedin.com/in/oluwafemi-olabukoye" target="_blank" rel="noopener" data-goatcounter-click="contact-linkedin">linkedin.com/in/oluwafemi-olabukoye</a><button type="button" data-copy="v-li">Copy</button></div>
       <div class="link-row"><small>GitHub</small><a class="val" id="v-gh" href="https://github.com/oluwafemi-olabukoye" target="_blank" rel="noopener" data-goatcounter-click="contact-github">github.com/oluwafemi-olabukoye</a><button type="button" data-copy="v-gh">Copy</button></div>
-      <div class="link-row"><small>Location</small><span class="val" id="v-loc">Lagos, Nigeria · UTC+1</span><button type="button" data-copy="v-loc">Copy</button></div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span><b>FMGOLD</b> · From embedded hardware to connected industrial solutions.</span>
+    <span><b>FMGOLD</b></span>
     <span>© 2026 Oluwafemi Olabukoye</span>
   </div>
 </footer>
@@ -852,17 +711,17 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Scroll reveal and "in view" states (stand-ins for hover on touch screens).
-  var revealSel = '.sec-head, .case-text, .case-visual, .gallery figure, .skills > div, .role, .edu > div, .contact .wrap > *';
+  var revealSel = '.sec-head, .case-text, .case-visual, .gallery figure, .skills > div, .role, .edu > div, .mini, .contact .wrap > *';
   var reveals = document.querySelectorAll(revealSel);
   reveals.forEach(function (el) { el.classList.add('reveal'); });
   // Stagger items that sit side by side in grids.
-  [['.gallery figure', .08, 4], ['.skills > div', .05, 2], ['.process li', .12, 6], ['.edu > div', .1, 2]].forEach(function (g) {
+  [['.gallery figure', .08, 4], ['.skills > div', .05, 2], ['.mini', .1, 2], ['.edu > div', .1, 2]].forEach(function (g) {
     document.querySelectorAll(g[0]).forEach(function (el, n) { el.style.setProperty('--d', ((n % g[2]) * g[1]) + 's'); });
   });
   document.querySelectorAll('.case').forEach(function (c) {
     c.querySelectorAll('.io').forEach(function (el, n) { el.style.setProperty('--d', (.15 + n * .09) + 's'); });
   });
-  var watch = document.querySelectorAll(revealSel + ', .case, .process li, .proof a');
+  var watch = document.querySelectorAll(revealSel + ', .case');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -912,26 +771,6 @@ footer b { color: var(--gold); font-family: var(--f-display); font-stretch: 118%
       }
       setTimeout(function () { requestAnimationFrame(step); }, 700);
     });
-  }
-
-  // Typed focus line.
-  var typedEl = document.getElementById('typed');
-  var words = ['embedded firmware', 'industrial IoT', 'PCB design', 'edge-to-cloud integration', 'field commissioning'];
-  if (typedEl) {
-    var w = 0, c = words[0].length, deleting = true;
-    function tick() {
-      var word = words[w];
-      if (deleting) {
-        c--; typedEl.textContent = word.slice(0, c);
-        if (c === 0) { deleting = false; w = (w + 1) % words.length; }
-        setTimeout(tick, 40);
-      } else {
-        word = words[w]; c++; typedEl.textContent = word.slice(0, c);
-        if (c === word.length) { deleting = true; setTimeout(tick, 2200); }
-        else setTimeout(tick, 70);
-      }
-    }
-    setTimeout(tick, 2600);
   }
 
   // Hero background: PCB traces on the 32px grid with signals travelling along them.
